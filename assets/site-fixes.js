@@ -105,6 +105,11 @@
       .codex-mobile-links{display:grid;gap:8px;padding-top:8px;padding-bottom:28px;overflow:visible}
       .codex-mobile-links a{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:13px 14px;border-radius:16px;background:hsl(var(--secondary)/.55);font-weight:800;text-decoration:none;color:hsl(var(--foreground))}
       .codex-mobile-links a:hover,.codex-mobile-links a:focus{background:hsl(var(--primary)/.14);color:hsl(var(--primary));outline:none}
+      .site-editor-toolbar{transition:transform .2s ease,opacity .2s ease}
+      .site-editor-toolbar.codex-toolbar-collapsed{transform:translate(-50%,calc(100% - 42px))!important;opacity:.92}
+      .site-editor-toolbar.codex-toolbar-collapsed>*:not(.codex-toolbar-toggle){display:none!important}
+      .codex-toolbar-toggle{min-width:42px!important;height:34px!important;border-radius:999px!important;padding:0 12px!important;background:hsl(var(--primary))!important;color:#fff!important;font-weight:900!important;box-shadow:0 10px 30px rgba(0,0,0,.25)!important}
+      .site-editor-toolbar.codex-toolbar-collapsed .codex-toolbar-toggle{display:inline-flex!important;align-items:center!important;justify-content:center!important}
       .codex-card-media-fixed{cursor:zoom-in;background:hsl(var(--secondary))!important}
       .codex-card-media-fixed>img{width:100%;height:100%;object-fit:cover}
       .codex-lightbox-fix{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,4,15,.86);backdrop-filter:blur(12px)}
@@ -141,7 +146,7 @@
       .codex-compare-handle:after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#6d28d9;font-weight:900;box-shadow:0 12px 36px rgba(0,0,0,.35)}
       .codex-compare-label{position:absolute;top:14px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.55);font-weight:900}
       .codex-compare-label.before{left:14px}.codex-compare-label.after{right:14px}
-      @media(max-width:700px){.codex-launch-head,.codex-launch-body{padding-left:16px;padding-right:16px}.codex-compare{aspect-ratio:4/5}.site-editor-toolbar{left:8px!important;right:8px!important;transform:none!important;justify-content:center;flex-wrap:wrap}}
+      @media(max-width:700px){.codex-launch-head,.codex-launch-body{padding-left:16px;padding-right:16px}.codex-compare{aspect-ratio:4/5}.site-editor-toolbar{left:8px!important;right:8px!important;transform:none!important;justify-content:center;flex-wrap:wrap}.site-editor-toolbar.codex-toolbar-collapsed{transform:translateY(calc(100% - 42px))!important}}
     `;
     document.head.appendChild(style);
   }
@@ -296,6 +301,26 @@
     const bar = document.querySelector(".site-editor-toolbar");
     if (!bar || bar.dataset.codexToolbar === "1") return;
     bar.dataset.codexToolbar = "1";
+    const collapsedKey = "auditoria-toolbar-collapsed";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "codex-toolbar-toggle";
+    toggle.setAttribute("aria-label", "Свернуть панель редактирования");
+    toggle.textContent = localStorage.getItem(collapsedKey) === "1" ? "✎" : "×";
+    bar.prepend(toggle);
+    const applyCollapsed = () => {
+      const collapsed = localStorage.getItem(collapsedKey) === "1";
+      bar.classList.toggle("codex-toolbar-collapsed", collapsed);
+      toggle.textContent = collapsed ? "✎" : "×";
+      toggle.setAttribute("aria-label", collapsed ? "Показать панель редактирования" : "Свернуть панель редактирования");
+    };
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      localStorage.setItem(collapsedKey, localStorage.getItem(collapsedKey) === "1" ? "0" : "1");
+      applyCollapsed();
+    });
+    applyCollapsed();
     let edit = localStorage.getItem("auditoria-edit-mode") === "1";
     const editable = () => [...document.querySelectorAll("[data-site-edit-key], h1,h2,h3,p,li,input,textarea")].filter((el) => !el.closest("header") && !el.closest("footer") && !el.closest(".site-editor-toolbar"));
     const apply = () => {
