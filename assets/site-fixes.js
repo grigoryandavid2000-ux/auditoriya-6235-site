@@ -96,6 +96,15 @@
       .codex-dropdown-menu{position:fixed;z-index:9999;min-width:230px;padding:10px;border:1px solid hsl(var(--border));border-radius:18px;background:hsl(var(--card)/.96);box-shadow:0 18px 50px rgba(0,0,0,.25);backdrop-filter:blur(18px)}
       .codex-dropdown-menu a{display:block;padding:10px 12px;border-radius:12px;font-weight:700;color:hsl(var(--foreground));text-decoration:none}
       .codex-dropdown-menu a:hover{background:hsl(var(--primary)/.12);color:hsl(var(--primary))}
+      .codex-mobile-menu{position:fixed;inset:0;z-index:9999;display:none;background:rgba(4,5,18,.82);backdrop-filter:blur(18px);padding:18px}
+      .codex-mobile-menu.open{display:block}
+      .codex-mobile-panel{margin-left:auto;width:min(360px,100%);height:100%;border:1px solid hsl(var(--border));border-radius:26px;background:hsl(var(--card)/.96);box-shadow:0 26px 80px rgba(0,0,0,.38);padding:18px;display:flex;flex-direction:column;gap:12px}
+      .codex-mobile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid hsl(var(--border))}
+      .codex-mobile-title{font-size:18px;font-weight:900}
+      .codex-mobile-close{width:40px;height:40px;border-radius:999px;background:hsl(var(--secondary));font-size:24px;font-weight:800;line-height:1}
+      .codex-mobile-links{display:grid;gap:8px;padding-top:8px}
+      .codex-mobile-links a{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:16px;background:hsl(var(--secondary)/.55);font-weight:800;text-decoration:none;color:hsl(var(--foreground))}
+      .codex-mobile-links a:hover,.codex-mobile-links a:focus{background:hsl(var(--primary)/.14);color:hsl(var(--primary));outline:none}
       .codex-card-media-fixed{cursor:zoom-in;background:hsl(var(--secondary))!important}
       .codex-card-media-fixed>img{width:100%;height:100%;object-fit:cover}
       .codex-lightbox-fix{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,4,15,.86);backdrop-filter:blur(12px)}
@@ -225,6 +234,55 @@
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".codex-dropdown-menu") && e.target !== trigger) document.querySelector(".codex-dropdown-menu")?.remove();
     });
+  }
+
+  function setupMobileMenu() {
+    const trigger = [...document.querySelectorAll("button")].find((el) => el.getAttribute("aria-label") === "Меню" || textOf(el) === "Меню");
+    if (!trigger || trigger.dataset.codexMobileMenu === "1") return;
+    trigger.dataset.codexMobileMenu = "1";
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openMobileMenu();
+    });
+  }
+
+  function openMobileMenu() {
+    let menu = document.querySelector(".codex-mobile-menu");
+    if (!menu) {
+      menu = document.createElement("div");
+      menu.className = "codex-mobile-menu";
+      menu.innerHTML = `
+        <div class="codex-mobile-panel" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+          <div class="codex-mobile-head">
+            <div class="codex-mobile-title">Аудитория 6235</div>
+            <button type="button" class="codex-mobile-close" aria-label="Закрыть меню">×</button>
+          </div>
+          <nav class="codex-mobile-links"></nav>
+        </div>`;
+      const links = menu.querySelector(".codex-mobile-links");
+      pages.forEach(([label, href]) => {
+        const a = document.createElement("a");
+        a.href = href;
+        a.innerHTML = `<span>${label}</span><span aria-hidden="true">→</span>`;
+        links.appendChild(a);
+      });
+      document.body.appendChild(menu);
+      menu.addEventListener("click", (e) => {
+        if (e.target === menu || e.target.closest(".codex-mobile-close")) closeMobileMenu();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMobileMenu();
+      });
+    }
+    menu.classList.add("open");
+    document.body.style.overflow = "hidden";
+    menu.querySelector("a")?.focus();
+  }
+
+  function closeMobileMenu() {
+    document.querySelector(".codex-mobile-menu")?.classList.remove("open");
+    document.body.style.overflow = "";
   }
 
   function setupEditorToolbar() {
@@ -636,6 +694,7 @@
     cleanupGeneratedSections();
     setupTopButtons();
     setupDropdown();
+    setupMobileMenu();
     setupEditorToolbar();
     setupCollapsibles();
     setupLightbox();
