@@ -1,0 +1,182 @@
+{
+  "audit-back-before": {
+    "file": "assets/images/audit-back-before.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 170314
+  },
+  "audit-front-before": {
+    "file": "assets/images/audit-front-before.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 195114
+  },
+  "cable-management": {
+    "file": "assets/images/cable-management.webp",
+    "width": 266,
+    "height": 173,
+    "bytes": 7232
+  },
+  "charging-station": {
+    "file": "assets/images/charging-station.webp",
+    "width": 1124,
+    "height": 700,
+    "bytes": 43472
+  },
+  "classroom-after-wired-empty": {
+    "file": "assets/images/classroom-after-wired-empty.webp",
+    "width": 688,
+    "height": 517,
+    "bytes": 54134
+  },
+  "coffee-table": {
+    "file": "assets/images/coffee-table.webp",
+    "width": 269,
+    "height": 183,
+    "bytes": 11670
+  },
+  "cooler-stand": {
+    "file": "assets/images/cooler-stand.webp",
+    "width": 297,
+    "height": 255,
+    "bytes": 14922
+  },
+  "ergonomic-chairs": {
+    "file": "assets/images/ergonomic-chairs.webp",
+    "width": 264,
+    "height": 198,
+    "bytes": 7924
+  },
+  "fridge": {
+    "file": "assets/images/fridge.webp",
+    "width": 269,
+    "height": 182,
+    "bytes": 8582
+  },
+  "interactive-panel": {
+    "file": "assets/images/interactive-panel.webp",
+    "width": 269,
+    "height": 195,
+    "bytes": 6344
+  },
+  "laptop": {
+    "file": "assets/images/laptop.webp",
+    "width": 270,
+    "height": 183,
+    "bytes": 7512
+  },
+  "led-panels": {
+    "file": "assets/images/led-panels.webp",
+    "width": 270,
+    "height": 185,
+    "bytes": 3760
+  },
+  "lounge-zone": {
+    "file": "assets/images/lounge-zone.webp",
+    "width": 296,
+    "height": 269,
+    "bytes": 13550
+  },
+  "magnetic-whiteboard": {
+    "file": "assets/images/magnetic-whiteboard.webp",
+    "width": 266,
+    "height": 181,
+    "bytes": 2510
+  },
+  "modern-classroom-back": {
+    "file": "assets/images/modern-classroom-back.webp",
+    "width": 1280,
+    "height": 940,
+    "bytes": 163548
+  },
+  "modern-classroom-empty": {
+    "file": "assets/images/modern-classroom-empty.webp",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 195842
+  },
+  "modern-classroom-front": {
+    "file": "assets/images/modern-classroom-front.webp",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 207550
+  },
+  "plants": {
+    "file": "assets/images/plants.webp",
+    "width": 268,
+    "height": 180,
+    "bytes": 10054
+  },
+  "projector": {
+    "file": "assets/images/projector.webp",
+    "width": 267,
+    "height": 193,
+    "bytes": 4662
+  },
+  "ps5": {
+    "file": "assets/images/ps5.webp",
+    "width": 272,
+    "height": 179,
+    "bytes": 4702
+  },
+  "snack-rack": {
+    "file": "assets/images/snack-rack.webp",
+    "width": 273,
+    "height": 181,
+    "bytes": 9978
+  },
+  "sofa": {
+    "file": "assets/images/sofa.webp",
+    "width": 262,
+    "height": 180,
+    "bytes": 7322
+  },
+  "student-desk": {
+    "file": "assets/images/student-desk.webp",
+    "width": 232,
+    "height": 215,
+    "bytes": 9652
+  },
+  "student-workplace": {
+    "file": "assets/images/student-workplace.webp",
+    "width": 232,
+    "height": 215,
+    "bytes": 9652
+  },
+  "teacher-desk": {
+    "file": "assets/images/teacher-desk.webp",
+    "width": 240,
+    "height": 216,
+    "bytes": 7658
+  },
+  "teacher-workplace": {
+    "file": "assets/images/teacher-workplace.webp",
+    "width": 240,
+    "height": 216,
+    "bytes": 7658
+  },
+  "tv": {
+    "file": "assets/images/tv.webp",
+    "width": 270,
+    "height": 186,
+    "bytes": 4560
+  },
+  "wall-lights": {
+    "file": "assets/images/wall-lights.webp",
+    "width": 270,
+    "height": 183,
+    "bytes": 3372
+  },
+  "water-cooler": {
+    "file": "assets/images/water-cooler.webp",
+    "width": 271,
+    "height": 188,
+    "bytes": 6090
+  },
+  "wired-system-integration": {
+    "file": "assets/images/wired-system-integration.webp",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 249578
+  }
+}
